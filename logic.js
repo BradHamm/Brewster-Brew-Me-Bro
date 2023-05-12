@@ -110,11 +110,39 @@ function searchBreweries() {
     })
     .then(function(data) {
       displayBreweries(data);
+      addYelpData(  /*possibly pass through lat and long data for the specific location of the address?*/   );
     })
     .catch(function(error) {
       console.log('Error:', error);
     });
 }
+
+function addYelpData(   /* lat and long? */    ) {
+  var yelpAPI = 'Yelp API link + query selector =' + /* lat and long? */;
+
+  // Fetch data from the additional API
+  fetch(yelpAPI)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+      addYelpData(data);
+    })
+    .catch(function(error) {
+      console.log('Error:', error);
+    });
+}
+
+// Example function to assign the additional data to the user output card
+function addYelpData(/*     Object to be passed through     */) {
+  var yelpReview = /*   Review out of 5 stars from yelp    */;
+  var yelpDescription = /*   Atmosphere description from yelp   */;
+
+  // Assign the additional data to the respective elements on the user output card
+  document.getElementById('yelpReview').textContent = yelpReview;
+  document.getElementById('yelpDescription').textContent = yelpDescription;
+}
+
 
 //Displaying the brewery (eventually brewer*ies*) to the user via the output container
 function displayBreweries(breweries) {
