@@ -1,7 +1,7 @@
-homePageNav = document.getElementById("homeNav");
-favBrews = document.getElementById("favBrewsNav");
-favDrinks = document.getElementById("favDrinksNav");
-aboutUsNav = getElementById("#aboutUsNav");
+//homePageNav = document.getElementById("homeNav");
+//favBrews = document.getElementById("favBrewsNav");
+//favDrinks = document.getElementById("favDrinksNav");
+//aboutUsNav = getElementById("#aboutUsNav");
 
 
 // NavBar navigation buttons - Will bring the user to the selected webpage when it's clicked on.
@@ -64,14 +64,14 @@ function formSubmit (event) { //create an event listener for the formSubmit butt
     var userDescrip = document.getElementById("userDescription").value;
 
     var brewRatingInfo = { //remember this object for when we need to call it from local memory
-        rating: local.Storage.getItem("rating"),
+        rating: localStorage.getItem("rating"),
         brewName: brewName,
         brewType: brewType,
         brewAddress: brewAddress,
         userDescrip: userDescrip,
     };
 
-    localStorage.setItem("brewRatingInfo", JSON, stringify(brewRatingInfo)); //stringifes the object brewRatingInfo and stores it locally.
+    localStorage.setItem("brewRatingInfo", JSON.stringify(brewRatingInfo)); //stringifes the object brewRatingInfo and stores it locally.
 
     localStorage.removeItem("rating"); //no need for rating if it's stored within the brewRatingInfo object - Removed.
 
@@ -82,4 +82,57 @@ function formSubmit (event) { //create an event listener for the formSubmit butt
     //include some kind of pop-up window telling the user that their form has been submitted
 }
 
+
 brewerySubmit.addEventListener("click", formSubmit); //event listener for the form's submit button.
+
+
+//#searchBrew = Text field for the user input 
+//#searchButton = Search button 
+//#brewOutput = Card that the output is being printed out to
+//brewery name, address, type of brewery = info retrieved from the API
+//personal ratings, yelp ratings and yelpReview
+
+//Search button and search field for user input, accompanied by the function to display the information on a card:
+
+// Function to handle the search request
+
+
+function searchBreweries() {
+  var searchInput = document.getElementById('searchBrew').value; //Taking in user input for the brewery name.
+
+  // Will this run? Or do I need to convery SearchInput to a string?
+  var apiUrl = 'https://api.openbrewerydb.org/v1/breweries/autocomplete?query=' + searchInput + '';
+
+  // Fetching data from the OpenBreweryAPI
+  fetch(apiUrl)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+      displayBreweries(data);
+    })
+    .catch(function(error) {
+      console.log('Error:', error);
+    });
+}
+
+//Displaying the brewery (eventually brewer*ies*) to the user via the output container
+function displayBreweries(breweries) {
+  breweries.forEach(function(    /* brewery.whatever from the API call - Consult docs. */   ) { 
+    var breweryName = //name of brewery;
+    var breweryType = //type of brewery;
+    var breweryAddress =  //brewery address;
+    var userDescription = //brewery description;
+
+    // Assigning values to the Id's on the homepage's output card
+    document.getElementById('breweryName').textContent = breweryName;
+    document.getElementById('breweryType').textContent = breweryType;
+    document.getElementById('brewAddress').textContent = breweryAddress;
+    document.getElementById('userDescription').textContent = userDescription;
+    document.getElementById('rating').textContent = rating;
+  });
+}
+
+// Added event listener for the "Beer Me! Button on the home search page."
+var searchButton = document.getElementById('searchButton');
+searchButton.addEventListener('click', searchBreweries);
