@@ -5,3 +5,9 @@
     padding: 5%;
     
 }
+
+.info p {
+    font-family: merriweather; 
+    color:black;
+    text-align: left; 
+}
