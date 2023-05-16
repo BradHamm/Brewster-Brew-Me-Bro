@@ -4,12 +4,14 @@
 var brewerySubmit = document.getElementById('brewerySubmit')
 var searchButton = document.getElementById('searchButton')
 
-document.addEventListener("DOMContentLoaded", function () { //event listener for when the page is rendered
-    var savedRating = localStorage.getItem("rating"); //sets savedRating to previously stored ranks for breweries 
-    if (savedRating) { //so long as the rating does not return null... (if a value exists)
-        setRating(savedRating); //set the rating to whatever it is locally.
-    } //otherwise, just load normally
-});
+document.addEventListener('DOMContentLoaded', function () {
+  //event listener for when the page is rendered
+  var savedRating = localStorage.getItem('rating') //sets savedRating to previously stored ranks for breweries
+  if (savedRating) {
+    //so long as the rating does not return null... (if a value exists)
+    setRating(savedRating) //set the rating to whatever it is locally.
+  } //otherwise, just load normally
+})
 
 function rate (/*find a way, either through Id's or numbers to select the number of ratings in ascending order to pass */) {
   localStorage.setItem('rating', rating)
@@ -30,9 +32,10 @@ function setRating (rating) {
 
 // Form submission with brewery info retrived from the OpenBreweryAPI:
 
-function formSubmit (event) { //event listener for the formSubmit button 
-    event.preventDefault();
-    //Prevents default submission.
+function formSubmit (event) {
+  //event listener for the formSubmit button
+  event.preventDefault()
+  //Prevents default submission.
 
   var brewName = document.getElementById('breweryName').value //grabs all values within the user input fields to be stored
   var brewType = document.getElementById('breweryType').value
@@ -59,13 +62,18 @@ function formSubmit (event) { //event listener for the formSubmit button
   //include some kind of pop-up window telling the user that their form has been submitted
 }
 
+if (brewerySubmit) {
+  brewerySubmit.addEventListener('click', formSubmit) //event listener for the form's submit button.
+}
 
-brewerySubmit.addEventListener("click", formSubmit); //event listener for the form's submit button.
-searchButton.addEventListener("click", searchBreweries); //event listener for the home page's search button.
+if (searchButton) {
+  searchButton.addEventListener('click', searchBreweries) //event listener for the home page's search button.
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//#searchBrew = Text field for the user input 
-//#searchButton = Search button 
+//#searchBrew = Text field for the user input
+//#searchButton = Search button
 //#brewOutput = Card that the output is being printed out to
 //brewery name, address, type of brewery = info retrieved from the API
 //personal ratings, yelp ratings and yelpReview
@@ -76,106 +84,116 @@ searchButton.addEventListener("click", searchBreweries); //event listener for th
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function searchBreweries() {
-  var searchInput = document.getElementById('searchBrew').value; //Taking in user input for the brewery name.
+function searchBreweries () {
+  var searchInput = document.getElementById('searchBrew').value //Taking in user input for the brewery name.
 
   // Will this run? Or do I need to convery SearchInput to a string?
-  var apiUrl = 'https://api.openbrewerydb.org/v1/breweries/autocomplete?query=' + searchInput;
+  var apiUrl =
+    'https://api.openbrewerydb.org/v1/breweries/autocomplete?query=' +
+    searchInput
   console.log(apiUrl)
   // Fetching data from the OpenBreweryAPI
   fetch(apiUrl)
-    .then(function(response) {
-      return response.json();
+    .then(function (response) {
+      return response.json()
     })
-    .then(function(data) {
-      var breweryId = data[0].id; //targets only the *first* result in the object list 
+    .then(function (data) {
+      var breweryId = data[0].id //targets only the *first* result in the object list
       specifyBreweries(breweryId) //fetches additional data given the ID of the brewery
-        .then(function(additionalData) {
-          addYelpData(additionalData); //passes through all data for the brewery so it can be searched within the Yelp API.
-          displayBreweries(additionalData); //passes through all data for the brewery so it can be assigned to IDs in the card.
-        });
+        .then(function (additionalData) {
+          addYelpData(additionalData) //passes through all data for the brewery so it can be searched within the Yelp API.
+          displayBreweries(additionalData) //passes through all data for the brewery so it can be assigned to IDs in the card.
+        })
     })
-    .catch(function(error) {
-      console.log('Error:', error);
-    });
+    .catch(function (error) {
+      console.log('Error:', error)
+    })
 }
 
-function specifyBreweries(data) { //takes OPDB ids for Breweries (returned in the Search Breweries() autocomplete search) and returns the remainder of the information such as type and location.
- var brewApi = "https://api.openbrewerydb.org/v1/breweries/{" + data.id + "}";
+function specifyBreweries (data) {
+  //takes OPDB ids for Breweries (returned in the Search Breweries() autocomplete search) and returns the remainder of the information such as type and location.
+  var brewApi = 'https://api.openbrewerydb.org/v1/breweries/{' + data.id + '}'
 
- return fetch(brewApi) //will return run normally here and provide the needed information (see: additionalData in .then of searchBreweries)?
- .then(function(response) {
-   return response.json(); // Parse the response as JSON
- })
- .catch(function(error) {
-   console.log('Error:', error);
- });
+  return fetch(brewApi) //will return run normally here and provide the needed information (see: additionalData in .then of searchBreweries)?
+    .then(function (response) {
+      return response.json() // Parse the response as JSON
+    })
+    .catch(function (error) {
+      console.log('Error:', error)
+    })
 }
 
-function addYelpData(additionalData) { //since OPDB does the autocomplete for us, we can search by string without worrying about conflicts.
+function addYelpData (additionalData) {
+  //since OPDB does the autocomplete for us, we can search by string without worrying about conflicts.
   const options = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: 'Bearer Y-WSh5eIkuMuDWMXfDNDaMpdAiGF8H2KVS2n0xly501T8K21AVbyvzq0oUM0OrAJ_VbYYP_cyiZMkprJ4a6-7b-rk3mho2po6NiAa2F41pvUOYOSJ1HbyTQ2IupiZHYx'
+      Authorization:
+        'Bearer Y-WSh5eIkuMuDWMXfDNDaMpdAiGF8H2KVS2n0xly501T8K21AVbyvzq0oUM0OrAJ_VbYYP_cyiZMkprJ4a6-7b-rk3mho2po6NiAa2F41pvUOYOSJ1HbyTQ2IupiZHYx'
     }
-  };
-  
-  var name = additionalData.name;
-  var address = additionalData.address1;
+  }
+
+  var name = additionalData.name
+  var address = additionalData.address1
 
   // Construct the URL for the fetch call
-  var apiUrl = constructAdditionalApiUrl(name, address);
+  var apiUrl = constructAdditionalApiUrl(name, address)
 
   fetch(apiUrl, options)
-    .then(function(response) {
-      return response.json(); // Parse the response as JSON
+    .then(function (response) {
+      return response.json() // Parse the response as JSON
     })
-    .then(function(data) {
-      assignYelpData(data);
+    .then(function (data) {
+      assignYelpData(data)
     })
-    .catch(function(error) {
-      console.log('Error:', error);
-    });
-  }
+    .catch(function (error) {
+      console.log('Error:', error)
+    })
+}
 
-  function constructAdditionalApiUrl(name, address) {
-    //takes in name and address from OBDP fetch and replaces all spaces with %20 for url compliance, before returning the correct API for the Yelp fetch call.
-    var nameArray = name.split(' ').join('%20');
-    var addressArray = address.split(' ').join('%20');
-  
-    // Construct the URL with the formatted name and address
-    var apiUrl = 'https://api.yelp.com/v3/businesses/search?location=%22' + addressArray + '&term=' + nameArray + "&sort_by=best_match&limit=20";
-  
-    //console logging apiUrl for bug testing
-    console.log(apiUrl);
+function constructAdditionalApiUrl (name, address) {
+  //takes in name and address from OBDP fetch and replaces all spaces with %20 for url compliance, before returning the correct API for the Yelp fetch call.
+  var nameArray = name.split(' ').join('%20')
+  var addressArray = address.split(' ').join('%20')
 
-    return apiUrl;
-  }
+  // Construct the URL with the formatted name and address
+  var apiUrl =
+    'https://api.yelp.com/v3/businesses/search?location=%22' +
+    addressArray +
+    '&term=' +
+    nameArray +
+    '&sort_by=best_match&limit=20'
+
+  //console logging apiUrl for bug testing
+  console.log(apiUrl)
+
+  return apiUrl
+}
 
 // Example function to assign the additional data to the user output card
-function assignYelpData(yelpData) {
-  var yelpReview = yelpData.buisinesses[0].rating;
+function assignYelpData (yelpData) {
+  var yelpReview = yelpData.buisinesses[0].rating
   //var yelpDescription = /*   Atmosphere description from yelp   */;
 
   // Assign the additional data to the respective elements on the user output card
 
-  document.getElementById('yelpReview').textContent = yelpReview + "/5 Starts from Yelp!";
+  document.getElementById('yelpReview').textContent =
+    yelpReview + '/5 Starts from Yelp!'
   //document.getElementById('yelpDescription').textContent = yelpDescription;
 }
 
-
 //Displaying the brewery (eventually brewer*ies*) to the user via the output container
-function displayBreweries(brewery) {
-  brewery.forEach(function(brewery) { 
-    var breweryName = brewery.name;
-    var breweryType = brewery.brewery_type;
-    var breweryAddress =  brewery.address_1;
-    document.getElementById('breweryName').textContent = breweryName;
-    document.getElementById('breweryType').textContent = breweryType;
-    document.getElementById('brewAddress').textContent = breweryAddress;
+function displayBreweries (brewery) {
+  brewery.forEach(function (brewery) {
+    var breweryName = brewery.name
+    var breweryType = brewery.brewery_type
+    var breweryAddress = brewery.address_1
+    document.getElementById('breweryName').textContent = breweryName
+    document.getElementById('breweryType').textContent = breweryType
+    document.getElementById('brewAddress').textContent = breweryAddress
     //document.getElementById('userDescription').textContent = userDescription;
-  });
+  })
 }
 
 document.addEventListener('DOMContentLoaded', () => {
