@@ -51,7 +51,7 @@ function setRating (rating) {
   }
 
   for (var i = 0; i < rating; i++) {
-    rates[i].innerHTML = '&#9733;' //filled beer can representing locally stored rating from user
+    rates[i].innerHTML = '&#9733;' //filled beer can representing locally stored rating from user 🍺
   }
 }
 
