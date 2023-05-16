@@ -2,6 +2,7 @@
 //Find Icons for the brewery rating system or opt to leave them as stars.
 //
 
+var searchButton = document.getElementById('searchButton')
 
 document.addEventListener("DOMContentLoaded", function () { //event listener for when the page is rendered
     var savedRating = localStorage.getItem("rating"); //sets savedRating to previously stored ranks for breweries 
@@ -10,21 +11,21 @@ document.addEventListener("DOMContentLoaded", function () { //event listener for
     } //otherwise, just load normally
 });
 
-function rate(/*find a way, either through Id's or numbers to select the number of ratings in ascending order to pass */) { 
-    localStorage.setItem("rating", rating);
-    setRating(rating);
+function rate (/*find a way, either through Id's or numbers to select the number of ratings in ascending order to pass */) {
+  localStorage.setItem('rating', rating)
+  setRating(rating)
 }
 
-function setRating(rating) {
-    var brews = document.getElementsByClassName("rates");
+function setRating (rating) {
+  var brews = document.getElementsByClassName('rates')
 
-    for (var i = 0; i < brews.length; i++) {
-        rates[i].innerHTML = "&#9734;"; //empty beer can initializing the rating system so the rating value can override it in the next for loop.
-    }
+  for (var i = 0; i < brews.length; i++) {
+    rates[i].innerHTML = '&#9734;' //empty beer can initializing the rating system so the rating value can override it in the next for loop.
+  }
 
-    for (var i = 0; i < rating; i++) {
-        rates[i].innerHTML = "&#9733;" //filled beer can representing locally stored rating from user
-    }
+  for (var i = 0; i < rating; i++) {
+    rates[i].innerHTML = '&#9733;' //filled beer can representing locally stored rating from user
+  }
 }
 
 // Form submission with brewery info retrived from the OpenBreweryAPI:
@@ -33,28 +34,29 @@ function formSubmit (event) { //event listener for the formSubmit button
     event.preventDefault();
     //Prevents default submission.
 
-    var brewName = document.getElementById("breweryName").value; //grabs all values within the user input fields to be stored
-    var brewType = document.getElementById("breweryType").value; 
-    var brewAddress = document.getElementById("brewAddress").value; 
-    var userDescrip = document.getElementById("userDescription").value;
+  var brewName = document.getElementById('breweryName').value //grabs all values within the user input fields to be stored
+  var brewType = document.getElementById('breweryType').value
+  var brewAddress = document.getElementById('brewAddress').value
+  var userDescrip = document.getElementById('userDescription').value
 
-    var brewRatingInfo = { //remember this object for when we need to call it from local memory
-        rating: localStorage.getItem("rating"),
-        brewName: brewName,
-        brewType: brewType,
-        brewAddress: brewAddress,
-        userDescrip: userDescrip,
-    };
+  var brewRatingInfo = {
+    //remember this object for when we need to call it from local memory
+    rating: localStorage.getItem('rating'),
+    brewName: brewName,
+    brewType: brewType,
+    brewAddress: brewAddress,
+    userDescrip: userDescrip
+  }
 
-    localStorage.setItem("brewRatingInfo", JSON.stringify(brewRatingInfo)); //stringifes the object brewRatingInfo and stores it locally.
+  localStorage.setItem('brewRatingInfo', JSON.stringify(brewRatingInfo)) //stringifes the object brewRatingInfo and stores it locally.
 
-    localStorage.removeItem("rating"); //no need for rating if it's stored within the brewRatingInfo object - Removed.
+  localStorage.removeItem('rating') //no need for rating if it's stored within the brewRatingInfo object - Removed.
 
-    console.log(brewRatingInfo); //testing to see if the form data was submitted correctly into local storage.
+  console.log(brewRatingInfo) //testing to see if the form data was submitted correctly into local storage.
 
-    document.getElementById("breweryForm").reset(); //resets the form, so they can revise their review if they want to.
+  document.getElementById('breweryForm').reset() //resets the form, so they can revise their review if they want to.
 
-    //include some kind of pop-up window telling the user that their form has been submitted
+  //include some kind of pop-up window telling the user that their form has been submitted
 }
 
 
@@ -180,5 +182,31 @@ function displayBreweries(brewery) {
 }
 
 // Added event listener for the "Beer Me! Button on the home search page."
-var searchButton = document.getElementById('searchButton');
-searchButton.addEventListener('click', searchBreweries);
+var searchButton = document.getElementById('searchButton')
+if (searchButton) {
+  searchButton.addEventListener('click', searchBreweries)
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(
+    document.querySelectorAll('.navbar-burger'),
+    0
+  )
+
+  // Check if there are any navbar burgers
+  if ($navbarBurgers.length > 0) {
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target
+        const $target = document.getElementById(target)
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active')
+        $target.classList.toggle('is-active')
+      })
+    })
+  }
+})

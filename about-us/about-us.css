@@ -1,4 +1,13 @@
 .info {
     font-family: merriweather; 
-    color:white;
+    color:black;
+    text-align: center;
+    padding: 5%;
+    
+}
+
+.info p {
+    font-family: merriweather; 
+    color:black;
+    text-align: left; 
 }

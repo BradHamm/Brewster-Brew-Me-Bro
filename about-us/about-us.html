@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Brewster Home-Page</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="home-page.css">
+    <link rel="stylesheet" href="about-us.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
@@ -16,8 +16,9 @@
     <header>
         <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-              <a class="navbar-item" href="/home-page.html">
-                <img src="/Beer-Me-Bro.png" width="100" height="500">
+              <a class="navbar-item" href="../index.html">
+                <!--<img src="Beer-Me-Bro.png" width="100" height="500">-->
+                <h1 id="headerName">Brewster</h1> <!--trying this to see how we feel aboot it-->
               </a>
           
               <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -29,14 +30,14 @@
           
             <div id="navbarBasicExample" class="navbar-menu">
               <div class="navbar-start">
-                <a class="navbar-item">
+                <a class="navbar-item" href="../about-us/about-us.html">
                   About Us
                 </a>
           
-                <a class="navbar-item">
+                <a class="navbar-item" href="../fav-spots/fav.spots.html">
                   Favorite Spots
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item" href="../beer-list/beer-list.html">
                     Beer List
                 </a>
               </div>
@@ -44,16 +45,37 @@
           </nav>
     </header>
     <body>
+      <div class="block"></div>
       <section class="info">
+        <h1 class="title">Who are we?</h1>
+        <div class="block">
+        </div>
         <p>Beer me bro! The best slogan for the best beer app on the internet, Brewster. Who are we? We are a community of beer drinkers dedicated to the craft, with the goal of documenting our passion to save our favorite brews, breweries, and all the in-betweens.</p>  
-        <p>With this app, you are able to create a personal profile saving your favorite beers, ratings, reviews, and more! We also provide information on brewery vibes, location, and the like from well-established sources. Cheers to starting your Brewster journey! 
+        <br>
+        <p>With this app, you are able to create a personal profile saving your favorite beers, ratings, reviews, and more! We also provide information on brewery vibes, location, and the like from well-established sources. Cheers to starting your Brewster journey🍻
         </p>
+        </section>
+        <div class="block"></div>
+
+        <section class="section is-medium">
+          <div class="container has-text-centered">
+            <div class="colums is-mobile is-centered">
+            <div class="colums is-5">
+              <input class="input is-small is-success" type="email" placeholder="Join the mailing list">
+              <div class="block">
+                <div id="j-Button" class="box has-text-centered">
+                  <a class="button is-warning is-small is-focused" >Join!</a>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
         </section>
 
 
 
 
-    <script src="/logic.js"></script>
+    <script src="../logic.js"></script>
 
 </body>
 </html>

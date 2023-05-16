@@ -5,6 +5,129 @@ Green = #25511
 
 */
 
+#headerName {
+    font-size:xx-large;
+    font-family: 'Merriweather',serif;
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 480px) {
+    #pic {
+        position: absolute;
+        top:10%;
+        left: 26px;
+        max-width: 60px;
+        height: auto;
+    }
+    .item {
+        flex-basis: 100%;
+    }
+    .contact-bar {
+        flex-direction:column;
+    }
+    .nav-bar {
+        flex-direction:column;
+    }
+
+    .bottom-right-text {
+        font-size: small;
+    }
+    aside {
+        width: 5vh;
+    }
+    .info p {
+        font-size: small;
+    }
+    .nav-bar li a {
+        padding: 10px 16px;
+        text-decoration: none;
+    }
+}
+        
+/* Media Query for low resolution  Tablets, Ipads */
+@media (min-width: 481px) and (max-width: 767px) {
+    #pic {
+        position: absolute;
+        top: 1vh;
+        left: 6vh;
+        max-width: 78px;
+        height: auto;
+    }
+    .item {
+        flex-basis: 100%;
+    }
+    .contact-bar {
+        flex-direction:column;
+    }
+    .nav-bar {
+        flex-direction:column;
+    }
+    aside {
+        width: 17vh;
+    }
+    .info-item {
+        font-size: large;
+    }
+    .info p {
+        font-size: small;
+    }
+    .bottom-right-text {
+        font-size: small;
+    }
+    .nav-bar li a {
+        padding: 10px 16px;
+    }
+}
+
+    
+/* Media Query for Tablets Ipads portrait mode */
+@media (min-width: 768px) and (max-width: 1024px){
+    #pic {
+        position: absolute;
+        top: 8%;
+        left: 26px;
+        max-width: 120px;
+        height: auto;
+    }
+
+    aside {
+        width: 17vh;
+    }
+    .contact-bar {
+        flex-direction:column;
+    }
+    .info p {
+        font-size: small;
+    }
+}
+    
+/* Media Query for Laptops and Desktops */
+@media (min-width: 1025px) and (max-width: 1280px){
+    #pic {
+        position: absolute;
+        top: 15%;
+        left: 26px;
+        max-width: 120px;
+        height: auto;
+    }
+}
+        
+/* Media Query for Large screens */
+@media (min-width: 1281px) {
+    #pic {
+        position: absolute;
+        top: 15%;
+        left: 26px;
+        max-width: 150px;
+        height: auto;
+    }
+}
+
+@media all {
+    .info { flex: 3 0px; }
+    .aside1 { order: 1; } 
+    .info { order: 2; }
+}
 
 
 
