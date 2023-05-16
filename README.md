@@ -13,3 +13,5 @@ Continuing beyond the above, we split to work on different elements such as JS (
 Moving forward, site structure was built out further, including html, css, and js updates. This included workarounds such as linking to css and html sheets correctly - we initially had one "." in places where we needed two ".." for sheets outside of that folder.
 
 After html and css were laid out and connected properly, APIs were then connected. Furthermore, media queries and related hamburger menu were both added.
+
+Beyond this, we tightened up API functionality on the site, along with general bug fixing and site testing. 
