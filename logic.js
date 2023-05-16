@@ -62,23 +62,6 @@ function formSubmit (event) {
   //include some kind of pop-up window telling the user that their form has been submitted
 }
 
-
-brewerySubmit.addEventListener("click", formSubmit); //event listener for the form's submit button.
-searchButton.addEventListener("click", searchBreweries); //event listener for the home page's search button.
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//#searchBrew = Text field for the user input 
-//#searchButton = Search button 
-//#brewOutput = Card that the output is being printed out to
-//brewery name, address, type of brewery = info retrieved from the API
-//personal ratings, yelp ratings and yelpReview
-
-//Search button and search field for user input, accompanied by the function to display the information on a card:
-
-// Function to handle the search request
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 function searchBreweries() {
   var searchInput = document.getElementById('searchBrew').value; //Taking in user input for the brewery name.
 
