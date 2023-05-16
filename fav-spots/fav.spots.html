@@ -7,7 +7,7 @@
     <title>Brewster Home-Page</title>
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="home-page.css">
+    <link rel="stylesheet" href="fav-spots.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
@@ -29,20 +29,61 @@
           
             <div id="navbarBasicExample" class="navbar-menu">
               <div class="navbar-start">
-                <a class="navbar-item">
+                <a class="navbar-item" href="/about-us/about-us.html">
                   About Us
                 </a>
           
-                <a class="navbar-item">
+                <a class="navbar-item" href="/fav-spots/fav.spots.html">
                   Favorite Spots
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item" href="/beer-list/beer-list.html">
                     Beer List
                 </a>
               </div>
             </div>
           </nav>
     </header>
+    <div class="block"></div>
+    <h1 id="title" class="title">Favorite Spots </h1>
+
+      <section class="section is-small has-text-centered ">
+          <input class="input is-small is-success" type="text" placeholder="New Brewery Name">
+          <div class="block"></div>
+          <button class="button is-small is-warning is-focused"> Add To List</button>
+
+
+      </section>
+
+    <div class="block"></div>
+    <section class="section is-large">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">
+            brewery 1
+          </p>
+          <button class="card-header-icon" aria-label="more options">
+            <span class="icon">
+              <i class="fas fa-angle-down" aria-hidden="true"></i>
+            </span>
+          </button>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+            
+            <br>
+            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+          </div>
+        </div>
+        <footer class="card-footer">
+          <a href="#" class="card-footer-item">Save</a>
+          <a href="#" class="card-footer-item">Edit</a>
+          <a href="#" class="card-footer-item">Delete</a>
+        </footer>
+      </div>
+
+    </section>
+
     <body>
     <script src="/logic.js"></script>
 </body>
