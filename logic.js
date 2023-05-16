@@ -41,7 +41,7 @@ function formSubmit (event) { //event listener for the formSubmit button
 
   var brewRatingInfo = {
     //remember this object for when we need to call it from local memory
-    rating: localStorage.getItem('rating'),
+    //rating: localStorage.getItem('rating'),
     brewName: brewName,
     brewType: brewType,
     brewAddress: brewAddress,
@@ -61,7 +61,7 @@ function formSubmit (event) { //event listener for the formSubmit button
 
 
 brewerySubmit.addEventListener("click", formSubmit); //event listener for the form's submit button.
-
+searchButton.addEventListener("click", searchBreweries); //event listener for the home page's search button.
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //#searchBrew = Text field for the user input 
@@ -167,13 +167,10 @@ function assignYelpData(yelpData) {
 
 //Displaying the brewery (eventually brewer*ies*) to the user via the output container
 function displayBreweries(brewery) {
-  brewery.forEach(function(    /* brewery.whatever from the API call - Consult docs. */   ) { 
+  brewery.forEach(function(brewery) { 
     var breweryName = brewery.name;
     var breweryType = brewery.brewery_type;
     var breweryAddress =  brewery.address_1;
-    //var userDescription = brewery.;
-
-    // Assigning values to the Id's on the homepage's output card
     document.getElementById('breweryName').textContent = breweryName;
     document.getElementById('breweryType').textContent = breweryType;
     document.getElementById('brewAddress').textContent = breweryAddress;
