@@ -1,7 +1,7 @@
 //TODOS:
 //Find Icons for the brewery rating system or opt to leave them as stars.
 //
-
+var brewerySubmit = document.getElementById('brewerySubmit')
 var searchButton = document.getElementById('searchButton')
 
 document.addEventListener("DOMContentLoaded", function () { //event listener for when the page is rendered
@@ -176,12 +176,6 @@ function displayBreweries(brewery) {
     document.getElementById('brewAddress').textContent = breweryAddress;
     //document.getElementById('userDescription').textContent = userDescription;
   });
-}
-
-// Added event listener for the "Beer Me! Button on the home search page."
-var searchButton = document.getElementById('searchButton')
-if (searchButton) {
-  searchButton.addEventListener('click', searchBreweries)
 }
 
 document.addEventListener('DOMContentLoaded', () => {
