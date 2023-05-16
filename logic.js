@@ -1,8 +1,8 @@
 //TODOS:
 //Find Icons for the brewery rating system or opt to leave them as stars.
 //
-var brewerySubmit = document.getElementById('brewerySubmit')
-var searchButton = document.getElementById('searchButton')
+//var brewerySubmit = document.getElementById('brewerySubmit');
+var searchButton = document.getElementById('searchButton');
 
 document.addEventListener("DOMContentLoaded", function () { //event listener for when the page is rendered
     var savedRating = localStorage.getItem("rating"); //sets savedRating to previously stored ranks for breweries 
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () { //event listener for
 function rate (/*find a way, either through Id's or numbers to select the number of ratings in ascending order to pass */) {
   localStorage.setItem('rating', rating)
   setRating(rating)
-}
+};
 
 function setRating (rating) {
   var brews = document.getElementsByClassName('rates')
@@ -26,7 +26,7 @@ function setRating (rating) {
   for (var i = 0; i < rating; i++) {
     rates[i].innerHTML = '&#9733;' //filled beer can representing locally stored rating from user
   }
-}
+};
 
 // Form submission with brewery info retrived from the OpenBreweryAPI:
 
@@ -34,10 +34,10 @@ function formSubmit (event) { //event listener for the formSubmit button
     event.preventDefault();
     //Prevents default submission.
 
-  var brewName = document.getElementById('breweryName').value //grabs all values within the user input fields to be stored
-  var brewType = document.getElementById('breweryType').value
-  var brewAddress = document.getElementById('brewAddress').value
-  var userDescrip = document.getElementById('userDescription').value
+  var brewName = document.getElementById('breweryName').value; //grabs all values within the user input fields to be stored
+  var brewType = document.getElementById('breweryType').value;
+  var brewAddress = document.getElementById('brewAddress').value;
+  var userDescrip = document.getElementById('userDescription').value;
 
   var brewRatingInfo = {
     //remember this object for when we need to call it from local memory
@@ -48,33 +48,16 @@ function formSubmit (event) { //event listener for the formSubmit button
     userDescrip: userDescrip
   }
 
-  localStorage.setItem('brewRatingInfo', JSON.stringify(brewRatingInfo)) //stringifes the object brewRatingInfo and stores it locally.
+  localStorage.setItem('brewRatingInfo', JSON.stringify(brewRatingInfo)); //stringifes the object brewRatingInfo and stores it locally.
 
-  localStorage.removeItem('rating') //no need for rating if it's stored within the brewRatingInfo object - Removed.
+  localStorage.removeItem('rating'); //no need for rating if it's stored within the brewRatingInfo object - Removed.
 
-  console.log(brewRatingInfo) //testing to see if the form data was submitted correctly into local storage.
+  console.log(brewRatingInfo); //testing to see if the form data was submitted correctly into local storage.
 
-  document.getElementById('breweryForm').reset() //resets the form, so they can revise their review if they want to.
+  document.getElementById('breweryForm').reset(); //resets the form, so they can revise their review if they want to.
 
   //include some kind of pop-up window telling the user that their form has been submitted
 }
-
-
-brewerySubmit.addEventListener("click", formSubmit); //event listener for the form's submit button.
-searchButton.addEventListener("click", searchBreweries); //event listener for the home page's search button.
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//#searchBrew = Text field for the user input 
-//#searchButton = Search button 
-//#brewOutput = Card that the output is being printed out to
-//brewery name, address, type of brewery = info retrieved from the API
-//personal ratings, yelp ratings and yelpReview
-
-//Search button and search field for user input, accompanied by the function to display the information on a card:
-
-// Function to handle the search request
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function searchBreweries() {
   var searchInput = document.getElementById('searchBrew').value; //Taking in user input for the brewery name.
@@ -201,3 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 })
+
+
+//brewerySubmit.addEventListener("click", formSubmit); //event listener for the form's submit button.
+searchButton.addEventListener("click", searchBreweries); //event listener for the home page's search button.
