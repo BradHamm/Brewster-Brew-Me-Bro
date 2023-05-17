@@ -2,10 +2,10 @@
 //Find Icons for the brewery rating system or opt to leave them as stars.
 //
 //var brewerySubmit = document.getElementById('brewerySubmit');
-var searchButton = document.getElementById('searchButton');
+var searchButton = document.getElementById('searchButton')
 
 document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('saveBtn').addEventListener('click', saveBrewery);
+  document.getElementById('saveBtn').addEventListener('click', saveBrewery)
   //event listener for when the page is rendered
   var savedRating = localStorage.getItem('rating') //sets savedRating to previously stored ranks for breweries
   if (savedRating) {
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function rate (/*find a way, either through Id's or numbers to select the number of ratings in ascending order to pass */) {
   localStorage.setItem('rating', rating)
   setRating(rating)
-};
+}
 
 function setRating (rating) {
   var brews = document.getElementsByClassName('rates')
@@ -29,7 +29,7 @@ function setRating (rating) {
   for (var i = 0; i < rating; i++) {
     rates[i].innerHTML = '&#9733;' //filled beer can representing locally stored rating from user 🍺
   }
-};
+}
 
 // Form submission with brewery info retrived from the OpenBreweryAPI:
 
@@ -38,10 +38,10 @@ function formSubmit (event) {
   event.preventDefault()
   //Prevents default submission.
 
-  var brewName = document.getElementById('breweryName').value; //grabs all values within the user input fields to be stored
-  var brewType = document.getElementById('breweryType').value;
-  var brewAddress = document.getElementById('brewAddress').value;
-  var userDescrip = document.getElementById('userDescription').value;
+  var brewName = document.getElementById('breweryName').value //grabs all values within the user input fields to be stored
+  var brewType = document.getElementById('breweryType').value
+  var brewAddress = document.getElementById('brewAddress').value
+  var userDescrip = document.getElementById('userDescription').value
 
   var brewRatingInfo = {
     //remember this object for when we need to call it from local memory
@@ -52,51 +52,52 @@ function formSubmit (event) {
     userDescrip: userDescrip
   }
 
-  localStorage.setItem('brewRatingInfo', JSON.stringify(brewRatingInfo)); //stringifes the object brewRatingInfo and stores it locally.
+  localStorage.setItem('brewRatingInfo', JSON.stringify(brewRatingInfo)) //stringifes the object brewRatingInfo and stores it locally.
 
-  localStorage.removeItem('rating'); //no need for rating if it's stored within the brewRatingInfo object - Removed.
+  localStorage.removeItem('rating') //no need for rating if it's stored within the brewRatingInfo object - Removed.
 
-  console.log(brewRatingInfo); //testing to see if the form data was submitted correctly into local storage.
+  console.log(brewRatingInfo) //testing to see if the form data was submitted correctly into local storage.
 
-  document.getElementById('breweryForm').reset(); //resets the form, so they can revise their review if they want to.
+  document.getElementById('breweryForm').reset() //resets the form, so they can revise their review if they want to.
 
   //include some kind of pop-up window telling the user that their form has been submitted
 }
 
-function searchBreweries() {
-  var searchInput = document.getElementById('searchBrew').value; // Taking in user input for the brewery name.
+function searchBreweries () {
+  var searchInput = document.getElementById('searchBrew').value // Taking in user input for the brewery name.
 
   var apiUrl =
-    'https://api.openbrewerydb.org/v1/breweries/autocomplete?query=' + searchInput;
-  console.log(apiUrl);
+    'https://api.openbrewerydb.org/v1/breweries/autocomplete?query=' +
+    searchInput
+  console.log(apiUrl)
 
   // Fetching data from the OpenBreweryAPI
   fetch(apiUrl)
     .then(function (response) {
-      return response.json();
+      return response.json()
     })
     .then(function (data) {
       if (data.length > 0) {
-        var breweryId = data[0].id; // Targets only the *first* result in the object list
+        var breweryId = data[0].id // Targets only the *first* result in the object list
         specifyBreweries(breweryId, searchInput) // Fetches additional data given the ID of the brewery
           .then(function (additionalData) {
-            displayBreweries(additionalData); // Passes through all data for the brewery so it can be assigned to IDs in the card.
+            displayBreweries(additionalData) // Passes through all data for the brewery so it can be assigned to IDs in the card.
           })
           .catch(function (error) {
-            console.log('Error:', error);
-          });
+            console.log('Error:', error)
+          })
       } else {
-        console.log('No breweries found for the search input:', searchInput);
+        console.log('No breweries found for the search input:', searchInput)
       }
     })
     .catch(function (error) {
-      console.log('Error:', error);
-    });
+      console.log('Error:', error)
+    })
 }
 
 function specifyBreweries (data) {
   //takes OPDB ids for Breweries (returned in the Search Breweries() autocomplete search) and returns the remainder of the information such as type and location.
-  var brewApi = `https://api.openbrewerydb.org/v1/breweries/${data}`;
+  var brewApi = `https://api.openbrewerydb.org/v1/breweries/${data}`
 
   return fetch(brewApi)
     .then(function (response) {
@@ -135,7 +136,7 @@ function specifyBreweries (data) {
       console.log('Error:', error)
     })
 }
-*/ 
+*/
 
 /*
 function constructAdditionalApiUrl (name, address) {
@@ -172,46 +173,49 @@ function assignYelpData (yelpData) {
 }
 */
 
-
 //Displaying the brewery (eventually brewer*ies*) to the user via the output container
-function displayBreweries(brewery) {
+function displayBreweries (brewery) {
+  var breweryName = brewery.name
+  var breweryType = brewery.brewery_type
+  var breweryAddress = brewery.address_1
 
-  var breweryName = brewery.name;
-  var breweryType = brewery.brewery_type;
-  var breweryAddress = brewery.address_1;
-
-  document.getElementById('breweryName').textContent = "Brewery Name: " + breweryName;
-  document.getElementById('breweryType').textContent = "Type of Brewery: " + breweryType.toUpperCase();
-  document.getElementById('brewAddress').textContent = "Brewery Address: " + breweryAddress;
+  document.getElementById('breweryName').textContent =
+    'Brewery Name: ' + breweryName
+  document.getElementById('breweryType').textContent =
+    'Type of Brewery: ' + breweryType.toUpperCase()
+  document.getElementById('brewAddress').textContent =
+    'Brewery Address: ' + breweryAddress
   //document.getElementById('userDescription').textContent = userDescription;
 }
 
-function createSaveButton() { //creates a save button for each id
-  var saveButton = document.createElement('button');
-  saveButton.innerText = 'Save';
-  saveButton.addEventListener('click', saveBrewery);
-  document.getElementById('saveBtn').appendChild(saveButton);
+function createSaveButton () {
+  //creates a save button for each id
+  var saveButton = document.createElement('button')
+  saveButton.innerText = 'Save'
+  saveButton.addEventListener('click', saveBrewery)
+  document.getElementById('saveBtn').appendChild(saveButton)
 }
 
 // Save the brewery information locally and append it to individualized cards
-function saveBrewery() {
-  var breweryName = document.getElementById('breweryName').textContent;
-  var breweryType = document.getElementById('breweryType').textContent;
-  var breweryAddress = document.getElementById('brewAddress').textContent;
+function saveBrewery () {
+  var breweryName = document.getElementById('breweryName').textContent
+  var breweryType = document.getElementById('breweryType').textContent
+  var breweryAddress = document.getElementById('brewAddress').textContent
 
-  var breweryInfo = { //organizes all information into an object so the specific values (breweryInfo.breweryName) can be targeted later
+  var breweryInfo = {
+    //organizes all information into an object so the specific values (breweryInfo.breweryName) can be targeted later
     name: breweryName,
     type: breweryType,
     address: breweryAddress
-  };
+  }
 
-  var savedBreweries = localStorage.getItem('savedBreweries');
+  var savedBreweries = localStorage.getItem('savedBreweries')
   if (savedBreweries) {
-    var breweries = JSON.parse(savedBreweries);
-    breweries.push(breweryInfo);
-    localStorage.setItem('savedBreweries', JSON.stringify(breweries));
+    var breweries = JSON.parse(savedBreweries)
+    breweries.push(breweryInfo)
+    localStorage.setItem('savedBreweries', JSON.stringify(breweries))
   } else {
-    localStorage.setItem('savedBreweries', JSON.stringify([breweryInfo]));
+    localStorage.setItem('savedBreweries', JSON.stringify([breweryInfo]))
   }
 }
 
@@ -239,6 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 })
 
-
 //brewerySubmit.addEventListener("click", formSubmit); //event listener for the form's submit button.
-searchButton.addEventListener("click", searchBreweries); //event listener for the home page's search button.
+if (searchButton) {
+  searchButton.addEventListener('click', searchBreweries) //event listener for the home page's search button.
+}
