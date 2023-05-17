@@ -63,36 +63,41 @@ function formSubmit (event) {
 }
 
 function searchBreweries() {
-  var searchInput = document.getElementById('searchBrew').value; //Taking in user input for the brewery name.
+  var searchInput = document.getElementById('searchBrew').value; // Taking in user input for the brewery name.
 
-  // Will this run? Or do I need to convery SearchInput to a string?
   var apiUrl =
-    'https://api.openbrewerydb.org/v1/breweries/autocomplete?query=' +
-    searchInput
-  console.log(apiUrl)
+    'https://api.openbrewerydb.org/v1/breweries/autocomplete?query=' + searchInput;
+  console.log(apiUrl);
+
   // Fetching data from the OpenBreweryAPI
   fetch(apiUrl)
     .then(function (response) {
-      return response.json()
+      return response.json();
     })
     .then(function (data) {
-      var breweryId = data[0].id //targets only the *first* result in the object list
-      specifyBreweries(breweryId) //fetches additional data given the ID of the brewery
-        .then(function (additionalData) {
-          addYelpData(additionalData) //passes through all data for the brewery so it can be searched within the Yelp API.
-          displayBreweries(additionalData) //passes through all data for the brewery so it can be assigned to IDs in the card.
-        })
+      if (data.length > 0) {
+        var breweryId = data[0].id; // Targets only the *first* result in the object list
+        specifyBreweries(breweryId, searchInput) // Fetches additional data given the ID of the brewery
+          .then(function (additionalData) {
+            displayBreweries(additionalData); // Passes through all data for the brewery so it can be assigned to IDs in the card.
+          })
+          .catch(function (error) {
+            console.log('Error:', error);
+          });
+      } else {
+        console.log('No breweries found for the search input:', searchInput);
+      }
     })
     .catch(function (error) {
-      console.log('Error:', error)
-    })
+      console.log('Error:', error);
+    });
 }
 
 function specifyBreweries (data) {
   //takes OPDB ids for Breweries (returned in the Search Breweries() autocomplete search) and returns the remainder of the information such as type and location.
-  var brewApi = 'https://api.openbrewerydb.org/v1/breweries/{' + data.id + '}'
+  var brewApi = `https://api.openbrewerydb.org/v1/breweries/${data}`;
 
-  return fetch(brewApi) //will return run normally here and provide the needed information (see: additionalData in .then of searchBreweries)?
+  return fetch(brewApi)
     .then(function (response) {
       return response.json() // Parse the response as JSON
     })
@@ -101,7 +106,7 @@ function specifyBreweries (data) {
     })
 }
 
-function addYelpData (additionalData) {
+/* function addYelpData (additionalData) {
   //since OPDB does the autocomplete for us, we can search by string without worrying about conflicts.
   const options = {
     method: 'GET',
@@ -111,9 +116,9 @@ function addYelpData (additionalData) {
         'Bearer Y-WSh5eIkuMuDWMXfDNDaMpdAiGF8H2KVS2n0xly501T8K21AVbyvzq0oUM0OrAJ_VbYYP_cyiZMkprJ4a6-7b-rk3mho2po6NiAa2F41pvUOYOSJ1HbyTQ2IupiZHYx'
     }
   }
-
-  var name = additionalData.name
-  var address = additionalData.address1
+  console.log(additionalData);
+  var name = additionalData.name;
+  var address = additionalData.address_1;
 
   // Construct the URL for the fetch call
   var apiUrl = constructAdditionalApiUrl(name, address)
@@ -129,15 +134,20 @@ function addYelpData (additionalData) {
       console.log('Error:', error)
     })
 }
+*/ 
 
+/*
 function constructAdditionalApiUrl (name, address) {
   //takes in name and address from OBDP fetch and replaces all spaces with %20 for url compliance, before returning the correct API for the Yelp fetch call.
+  console.log(name);
+  console.log(address);
+
   var nameArray = name.split(' ').join('%20')
   var addressArray = address.split(' ').join('%20')
 
   // Construct the URL with the formatted name and address
   var apiUrl =
-    'https://api.yelp.com/v3/businesses/search?location=%22' +
+    'https://api.yelp.com/v3/businesses/search?location=' +
     addressArray +
     '&term=' +
     nameArray +
@@ -149,29 +159,30 @@ function constructAdditionalApiUrl (name, address) {
   return apiUrl
 }
 
-// Example function to assign the additional data to the user output card
+*/
+
+/*
 function assignYelpData (yelpData) {
   var yelpReview = yelpData.buisinesses[0].rating
-  //var yelpDescription = /*   Atmosphere description from yelp   */;
-
-  // Assign the additional data to the respective elements on the user output card
-
+  var yelpDescription;
   document.getElementById('yelpReview').textContent =
     yelpReview + '/5 Starts from Yelp!'
-  //document.getElementById('yelpDescription').textContent = yelpDescription;
+    document.getElementById('yelpDescription').textContent = yelpDescription;
 }
+*/
+
 
 //Displaying the brewery (eventually brewer*ies*) to the user via the output container
-function displayBreweries (brewery) {
-  brewery.forEach(function (brewery) {
-    var breweryName = brewery.name
-    var breweryType = brewery.brewery_type
-    var breweryAddress = brewery.address_1
-    document.getElementById('breweryName').textContent = breweryName
-    document.getElementById('breweryType').textContent = breweryType
-    document.getElementById('brewAddress').textContent = breweryAddress
-    //document.getElementById('userDescription').textContent = userDescription;
-  })
+function displayBreweries(brewery) {
+
+  var breweryName = brewery.name;
+  var breweryType = brewery.brewery_type;
+  var breweryAddress = brewery.address_1;
+
+  document.getElementById('breweryName').textContent = "Brewery Name: " + breweryName;
+  document.getElementById('breweryType').textContent = "Type of Brewery: " + breweryType.toUpperCase();
+  document.getElementById('brewAddress').textContent = "Brewery Address: " + breweryAddress;
+  //document.getElementById('userDescription').textContent = userDescription;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
