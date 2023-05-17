@@ -142,7 +142,9 @@ Green = #25511
     .info { order: 2; }
 }
 
-
+.noBull li {
+    list-style-type: none;
+}
 
 
 
