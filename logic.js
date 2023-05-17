@@ -5,6 +5,7 @@
 var searchButton = document.getElementById('searchButton');
 
 document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById('saveBtn').addEventListener('click', saveBrewery);
   //event listener for when the page is rendered
   var savedRating = localStorage.getItem('rating') //sets savedRating to previously stored ranks for breweries
   if (savedRating) {
@@ -183,6 +184,35 @@ function displayBreweries(brewery) {
   document.getElementById('breweryType').textContent = "Type of Brewery: " + breweryType.toUpperCase();
   document.getElementById('brewAddress').textContent = "Brewery Address: " + breweryAddress;
   //document.getElementById('userDescription').textContent = userDescription;
+}
+
+function createSaveButton() { //creates a save button for each id
+  var saveButton = document.createElement('button');
+  saveButton.innerText = 'Save';
+  saveButton.addEventListener('click', saveBrewery);
+  document.getElementById('saveBtn').appendChild(saveButton);
+}
+
+// Save the brewery information locally and append it to individualized cards
+function saveBrewery() {
+  var breweryName = document.getElementById('breweryName').textContent;
+  var breweryType = document.getElementById('breweryType').textContent;
+  var breweryAddress = document.getElementById('brewAddress').textContent;
+
+  var breweryInfo = { //organizes all information into an object so the specific values (breweryInfo.breweryName) can be targeted later
+    name: breweryName,
+    type: breweryType,
+    address: breweryAddress
+  };
+
+  var savedBreweries = localStorage.getItem('savedBreweries');
+  if (savedBreweries) {
+    var breweries = JSON.parse(savedBreweries);
+    breweries.push(breweryInfo);
+    localStorage.setItem('savedBreweries', JSON.stringify(breweries));
+  } else {
+    localStorage.setItem('savedBreweries', JSON.stringify([breweryInfo]));
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
