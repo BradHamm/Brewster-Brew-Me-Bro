@@ -1,6 +1,15 @@
 function saveBeerLocally(beerData) {
     // Retrieve the existing saved beers from local storage
     const savedBeers = getSavedBeers();
+
+    const isDuplicate = savedBeers.some(function (beer) {
+        return beer.name === beerData.name;
+      });
+    
+      if (isDuplicate) {
+        console.log("Duplicate beer, you've had enough to drink."); //Maybe we can print this out to the screen instead of just console logging?
+        return; // Exit the function without saving
+      }
   
     // Add the new beer data to the saved beers array
     savedBeers.push({
@@ -19,8 +28,8 @@ function saveBeerLocally(beerData) {
   
     const savedBeers = getSavedBeers();
   
-    savedBeers.forEach(function (beer) {
-      const card = addBeer(beer);
+    savedBeers.forEach(function (beer, index) {
+      const card = addBeer(beer, index);
       container.append(card);
     });
   }
@@ -36,17 +45,21 @@ function saveBeerLocally(beerData) {
   
   var button = document.getElementById('fetchBeerButton');
   button.addEventListener('click', function () {
+    
     var textarea = document.getElementById('newBeer');
     var userInput = textarea.value.trim();
     var formattedInput = userInput.replace(/ /g, '_'); // Replace spaces with underscores
+    console.log(formattedInput);
   
-    var apiUrl = 'https://api.punkapi.com/v2/beers?beer_name=' + formattedInput + '&page=1&per_page=10';
+    var apiUrl = 'https://api.punkapi.com/v2/beers?beer_name=' + formattedInput + '&page=1&per_page=1';
+    console.log(apiUrl);
   
     fetch(apiUrl)
       .then(function (response) {
         return response.json();
       })
       .then(function (data) {
+        console.log(data);
         if (data.length > 0) {
           var beerData = data[0]; // Get the top result
           saveBeerLocally(beerData); // Save the beer locally
@@ -60,13 +73,26 @@ function saveBeerLocally(beerData) {
       });
   });
 
-  function addBeer(favBeer) {
+  function renderSavedBeers() {
+    const container = document.getElementById('beerList');
+    container.innerHTML = ''; // Clear the container before rendering
+  
+    const savedBeers = getSavedBeers();
+  
+    savedBeers.forEach(function (beer, index) { // Add index parameter here
+      const card = addBeer(beer, index); // Pass index here
+      container.append(card);
+    });
+  }
+  
+  function addBeer(favBeer, index) { // Add index parameter here
     const articleEl = document.createElement('article');
     articleEl.classList.add('tile', 'is-child', 'notification', 'is-warning');
   
+    // Create and append elements for beer name, abv, and tagline
     const pEl = document.createElement('p');
-    pEl.classList.add('title');
-    pEl.textContent = favBeer.name; // Use API for True Suffix
+    pEl.classList.add('title' , 'is-4');
+    pEl.textContent = favBeer.name;
     articleEl.append(pEl);
   
     const abvEl = document.createElement('p');
@@ -79,14 +105,25 @@ function saveBeerLocally(beerData) {
     taglineEl.textContent = favBeer.tagline;
     articleEl.append(taglineEl);
   
+    // Create a delete button and add event listener
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.addEventListener('click', function () {
+      deleteBeer(index);
+    });
+    articleEl.append(deleteButton);
+  
+    // Create a textarea for notes
     const textareaEl = document.createElement('textarea');
     textareaEl.classList.add('textarea', 'is-success', 'is-focused');
     articleEl.append(textareaEl);
   
+    // Create a div for the block
     const divEl = document.createElement('div');
     divEl.classList.add('block');
     articleEl.append(divEl);
   
+    // Create a save button and add event listener
     const buttonEl = document.createElement('button');
     buttonEl.classList.add('button', 'is-success');
     buttonEl.textContent = 'Save';
@@ -96,11 +133,23 @@ function saveBeerLocally(beerData) {
     });
     articleEl.append(buttonEl);
   
-    const divParentEl = document.createElement('div');
-    divParentEl.classList.add('tile', 'is-4', 'is-warning', 'is-parent');
-    divParentEl.append(articleEl);
+    return articleEl;
+  }
+
+
+   function deleteBeer(index) {
+    // Retrieve the existing saved beers from local storage
+    const savedBeers = getSavedBeers();
   
-   return divParentEl;  }
+    // Remove the beer at the specified index
+    savedBeers.splice(index, 1);
+  
+    // Save the updated beers array to local storage
+    localStorage.setItem('savedBeers', JSON.stringify(savedBeers));
+  
+    // Re-render the saved beers
+    renderSavedBeers();
+  }
 
     // if user hits enter key, also save to list
     document.getElementById('newBeer').addEventListener("keypress", function(event) {
