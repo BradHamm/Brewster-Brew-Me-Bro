@@ -14,3 +14,18 @@
 .notification.is-warning {
     background-color: #F9CDAD !important;
 }
+
+
+#beerList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+#beerList .tile {
+    min-width: 400px;
+    min-height: 500px; 
+    margin: 2rem;
+}
+

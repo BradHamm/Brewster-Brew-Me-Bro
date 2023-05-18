@@ -43,42 +43,18 @@
     </div>
   </nav>
 </header>
-<section class="section is-large pt-6">
-  <h1 class="title">Beer List</h1>
-  <input id="newBeer" class="input is-small is-success" type="text" placeholder="Search Beer Name">
-  <div class="block"></div>
-  <button class="button is-small is-warning is-focused"> Add To List</button>
-  <div class="block"></div>
-  <div class="tile is-ancestor">
-    <div class="tile is-4 is-warning is-parent">
-      <article class="tile is-child notification is-warning">
-        <p class="title">Modelo</p>
-        <textarea class="textarea is-success is-focused" placeholder="Tell us about the beer!"></textarea>
-        <div class="block"></div>
-        <button class="button is-success">Save</button>
-      </article>
-    </div>
-    <div class="tile is-4 is-warning is-parent">
-      <article class="tile is-child notification is-warning">
-        <p class="title">Speedway Stout</p>
-        <textarea class="textarea is-success is-focused" placeholder="Tell us about the beer!"></textarea>
-        <div class="block"></div>
-        <button class="button is-success">Save</button>
-      </article>
-
-    </div>
-    <div class="tile is-4 is-warning is-parent">
-      <article class="tile is-child notification is-warning">
-        <p class="title">Sculpin IPA</p>
-        <textarea class="textarea is-success is-focused" placeholder="Tell us about the beer!"></textarea>
-        <div class="block"></div>
-        <button class="button is-success">Save</button>
-      </article>
-    </div>
-  </div>
-</section>
 
 <body>
+
+<section class="section is-large pt-6">
+  <h1 class="title">Beer List</h1>
+  <input class="input is-small is-success" id="newBeer" type="text" placeholder="Search Beer Name">
+  <div class="block"></div>
+  <button class="button is-small is-warning is-focused" id="fetchBeerButton"> Add To List</button>
+  <div class="block"></div>
+  <div id="beerList" class="tile is-ancestor">
+</section>
+
   <script src="../logic.js"></script>
   <script src="beer-list.js"></script>
 </body>
