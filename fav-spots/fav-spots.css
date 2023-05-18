@@ -4,7 +4,6 @@ body {
 
 header {
     background-color: #AE5502;
-
 }
 
 .title {
@@ -31,3 +30,13 @@ header {
     background-color: #F9CDAD !important;
 }
 
+.tile.is-parent {
+    display: flex;
+    justify-content: center;
+}
+
+.tile.is-child.notification.is-warning {
+    width: 300px; /* Adjust the width as per your preference */
+    margin: 10px;
+    padding: 10px;
+}
