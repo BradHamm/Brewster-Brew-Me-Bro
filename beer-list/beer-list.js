@@ -100,6 +100,17 @@ function saveBeerLocally(beerData) {
     divParentEl.classList.add('tile', 'is-4', 'is-warning', 'is-parent');
     divParentEl.append(articleEl);
   
-   return divParentEl;
-  }
+   return divParentEl;  }
+
+    // if user hits enter key, also save to list
+    document.getElementById('newBeer').addEventListener("keypress", function(event) {
+        // If the user presses the "Enter" key on the keyboard
+        if (event.key === "Enter") {
+            console.log('hit enter button')
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // TODO: place search beer function here
+        }
+    });
+
 
