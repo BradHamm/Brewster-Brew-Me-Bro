@@ -173,4 +173,14 @@ document.addEventListener('DOMContentLoaded', () => {
 //brewerySubmit.addEventListener("click", formSubmit); //event listener for the form's submit button.
 if (searchButton) {
   searchButton.addEventListener('click', searchBreweries) //event listener for the home page's search button.
+
+  // if user hits enter key, also search
+  document.getElementById('searchBrew').addEventListener("keypress", function(event) {
+    // If the user presses the "Enter" key on the keyboard
+    if (event.key === "Enter") {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      searchBreweries();
+    }
+  });
 }
