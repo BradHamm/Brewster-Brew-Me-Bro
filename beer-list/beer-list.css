@@ -15,6 +15,7 @@
     background-color: #F9CDAD !important;
 }
 
+
 #beerList {
     display: flex;
     flex-wrap: wrap;
@@ -27,3 +28,4 @@
     min-height: 500px; 
     margin: 2rem;
 }
+
