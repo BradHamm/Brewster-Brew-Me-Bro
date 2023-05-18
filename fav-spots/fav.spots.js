@@ -213,3 +213,13 @@ function setRating(index, rating) {
   document.getElementById('saveToList').addEventListener('click', function () {
     searchAndSaveBreweries();
   });
+
+  // if user hits enter key, also save to list
+  document.getElementById('searchBrew').addEventListener("keypress", function(event) {
+    // If the user presses the "Enter" key on the keyboard
+    if (event.key === "Enter") {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      searchAndSaveBreweries();
+    }
+  });
