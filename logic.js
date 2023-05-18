@@ -134,12 +134,15 @@ function saveBrewery() {
   }
 
   var savedBreweries = localStorage.getItem('savedBreweries')
-  if (savedBreweries) {
-    var breweries = JSON.parse(savedBreweries)
-    breweries.push(breweryInfo)
-    localStorage.setItem('savedBreweries', JSON.stringify(breweries))
-  } else {
-    localStorage.setItem('savedBreweries', JSON.stringify([breweryInfo])); //if no array currently exists for breweryInfo, create one.
+  
+  if (breweryName !== 'Brewery Name') { // user can't save empty to favorites
+    if (savedBreweries) {
+      var breweries = JSON.parse(savedBreweries)
+      breweries.push(breweryInfo)
+      localStorage.setItem('savedBreweries', JSON.stringify(breweries))
+    } else {
+      localStorage.setItem('savedBreweries', JSON.stringify([breweryInfo])); //if no array currently exists for breweryInfo, create one.
+    }
   }
 }
 

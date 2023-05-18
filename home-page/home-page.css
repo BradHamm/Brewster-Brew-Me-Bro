@@ -1,5 +1,25 @@
 /*Google font CSS info: font-family: 'Merriweather', serif;*/
 /*change cursor to emoji on hover... cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🏄</text></svg>") 16 0,auto; /*!emojicursor.app*/
-body{
-    background-color:#D6d6d6 ;
+body {
+    background-color: #FFFDFE;
+}
+
+#searchBrew {
+    width: fit-content;
+}
+
+#saveBtn {
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🍺</text></svg>") 16 0, auto;
+    border: none;
+    font-size: x-large;
+    background-color: #00d1b2;
+    color: white;
+}
+
+#saveBtn:hover {
+    background-color: #03e4c2;
+}
+
+.card-content {
+    background-color: #F9CDAD;
 }

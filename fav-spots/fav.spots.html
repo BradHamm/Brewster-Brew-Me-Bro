@@ -1,77 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Brewster Home-Page</title>
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="fav-spots.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brewster Home-Page</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="fav-spots.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
 </head>
 
-    <header>
-        <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-              <a class="navbar-item" href="../index.html">
-                <!--<img src="Beer-Me-Bro.png" width="100" height="500">-->
-                <h1 id="headerName">Brewster</h1> <!--trying this to see how we feel aboot it-->
-              </a>
-          
-              <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-              </a>
-            </div>
-          
-            <div id="navbarBasicExample" class="navbar-menu">
-              <div class="navbar-start">
-                <a class="navbar-item" href="../about-us/about-us.html">
-                  About Us
-                </a>
-          
-                <a class="navbar-item" href="../fav-spots/fav.spots.html">
-                  Favorite Spots
-                </a>
-                <a class="navbar-item" href="../beer-list/beer-list.html">
-                    Beer List
-                </a>
-              </div>
-            </div>
-          </nav>
-    </header>
-    <div class="block"></div>
-    <h1 id="title" class="title">Favorite Spots </h1>
-      <section class="section is-large has-text-centered ">
-          <input class="input is-small is-success" id="searchBrew" type="text" placeholder="New Brewery Name">
+<header>
+  <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../index.html">
+        <!--<img src="Beer-Me-Bro.png" width="100" height="500">-->
+        <h1 id="headerName">Brewster</h1> <!--trying this to see how we feel aboot it-->
+      </a>
 
-          <div class="block"></div>
-          <button class="button is-small is-warning is-focused" id="saveToList"> Add To List</button>
-          <div class="block"></div>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
 
-          <div id="favoriteBreweriesList" class="tile is-ancestor">
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="../about-us/about-us.html">
+          About Us
+        </a>
 
-          </div>
-          
+        <a class="navbar-item" href="../fav-spots/fav.spots.html">
+          Favorite Spots
+        </a>
+        <a class="navbar-item" href="../beer-list/beer-list.html">
+          Beer List
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="block"></div>
+<h1 id="title" class="title">Favorite Spots </h1>
+<section class="section is-large has-text-centered ">
+  <input class="input is-small is-success" id="searchBrew" type="text" placeholder="Search Brewery Name">
 
+  <div class="block"></div>
+  <button class="button is-small is-warning is-focused" id="saveToList"> Add To List</button>
+  <div class="block"></div>
 
-      </section>
+  <div id="favoriteBreweriesList" class="tile is-ancestor">
+
+  </div>
 
 
 
-    <body>
-    <script src="fav.spots.js"></script>
-    <script src="../logic.js"></script>
+</section>
+
+
+
+<body>
+  <script src="fav.spots.js"></script>
+  <script src="../logic.js"></script>
 </body>
+
 </html>
-
-
-
-
-
-
-

@@ -1,11 +1,13 @@
-body{
-    background-color:#D6d6d6 ;
+body {
+    background-color: #FFFDFE;
 }
-header{
+
+header {
     background-color: #AE5502;
 
 }
-.title{
+
+.title {
     color: black;
     text-align: center;
 }
@@ -15,8 +17,17 @@ header{
     font-size: 24px;
     color: #999;
     cursor: pointer;
-  }
-  
-  .rates .star {
-    color: #ffc107;
-  }
+}
+
+.rates .star {
+    color: cornsilk;
+}
+
+#searchBrew {
+    width: fit-content;
+}
+
+.is-child.notification.is-warning {
+    background-color: #F9CDAD !important;
+}
+
