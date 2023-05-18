@@ -1,9 +1,6 @@
-//TODOS:
-//Find Icons for the brewery rating system or opt to leave them as stars.
 //
-//var brewerySubmit = document.getElementById('brewerySubmit');
-var searchButton = document.getElementById('searchButton');
 
+var searchButton = document.getElementById('searchButton');
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('saveBtn').addEventListener('click', saveBrewery);
   //event listener for when the page is rendered
@@ -14,22 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
   } //otherwise, just load normally
 })
 
-function rate (/*find a way, either through Id's or numbers to select the number of ratings in ascending order to pass */) {
-  localStorage.setItem('rating', rating)
-  setRating(rating)
-};
-
-function setRating (rating) {
-  var brews = document.getElementsByClassName('rates')
-
-  for (var i = 0; i < brews.length; i++) {
-    rates[i].innerHTML = '&#9734;' //empty beer can initializing the rating system so the rating value can override it in the next for loop.
-  }
-
-  for (var i = 0; i < rating; i++) {
-    rates[i].innerHTML = '&#9733;' //filled beer can representing locally stored rating from user 🍺
-  }
-};
+//
 
 // Form submission with brewery info retrived from the OpenBreweryAPI:
 
@@ -107,71 +89,7 @@ function specifyBreweries (data) {
     })
 }
 
-/* function addYelpData (additionalData) {
-  //since OPDB does the autocomplete for us, we can search by string without worrying about conflicts.
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization:
-        'Bearer Y-WSh5eIkuMuDWMXfDNDaMpdAiGF8H2KVS2n0xly501T8K21AVbyvzq0oUM0OrAJ_VbYYP_cyiZMkprJ4a6-7b-rk3mho2po6NiAa2F41pvUOYOSJ1HbyTQ2IupiZHYx'
-    }
-  }
-  console.log(additionalData);
-  var name = additionalData.name;
-  var address = additionalData.address_1;
-
-  // Construct the URL for the fetch call
-  var apiUrl = constructAdditionalApiUrl(name, address)
-
-  fetch(apiUrl, options)
-    .then(function (response) {
-      return response.json() // Parse the response as JSON
-    })
-    .then(function (data) {
-      assignYelpData(data)
-    })
-    .catch(function (error) {
-      console.log('Error:', error)
-    })
-}
-*/ 
-
-/*
-function constructAdditionalApiUrl (name, address) {
-  //takes in name and address from OBDP fetch and replaces all spaces with %20 for url compliance, before returning the correct API for the Yelp fetch call.
-  console.log(name);
-  console.log(address);
-
-  var nameArray = name.split(' ').join('%20')
-  var addressArray = address.split(' ').join('%20')
-
-  // Construct the URL with the formatted name and address
-  var apiUrl =
-    'https://api.yelp.com/v3/businesses/search?location=' +
-    addressArray +
-    '&term=' +
-    nameArray +
-    '&sort_by=best_match&limit=20'
-
-  //console logging apiUrl for bug testing
-  console.log(apiUrl)
-
-  return apiUrl
-}
-
-*/
-
-/*
-function assignYelpData (yelpData) {
-  var yelpReview = yelpData.buisinesses[0].rating
-  var yelpDescription;
-  document.getElementById('yelpReview').textContent =
-    yelpReview + '/5 Starts from Yelp!'
-    document.getElementById('yelpDescription').textContent = yelpDescription;
-}
-*/
-
+//
 
 //Displaying the brewery (eventually brewer*ies*) to the user via the output container
 function displayBreweries(brewery) {
@@ -183,6 +101,7 @@ function displayBreweries(brewery) {
   document.getElementById('breweryName').textContent = "Brewery Name: " + breweryName;
   document.getElementById('breweryType').textContent = "Type of Brewery: " + breweryType.toUpperCase();
   document.getElementById('brewAddress').textContent = "Brewery Address: " + breweryAddress;
+  document.getElementById('placeholderTitle').textContent = "Cheers!";
   //document.getElementById('userDescription').textContent = userDescription;
 }
 
@@ -193,11 +112,18 @@ function createSaveButton() { //creates a save button for each id
   document.getElementById('saveBtn').appendChild(saveButton);
 }
 
-// Save the brewery information locally and append it to individualized cards
+// Save the brewery information locally
 function saveBrewery() {
-  var breweryName = document.getElementById('breweryName').textContent;
-  var breweryType = document.getElementById('breweryType').textContent;
-  var breweryAddress = document.getElementById('brewAddress').textContent;
+  var breweryName = document.getElementById('breweryName').textContent.trim();
+  var breweryType = document.getElementById('breweryType').textContent.trim();
+  var breweryAddress = document.getElementById('brewAddress').textContent.trim();
+  //.trim just removes whitespace so the conditional statements can run correctly.
+
+  if (
+    breweryName === 'Brewery Name' || breweryType === 'Brewery Type' || breweryAddress === 'Brewery Address') {
+    console.log('User annot save a blank card.');
+    return; //returns without saving
+  }
 
   var breweryInfo = { //organizes all information into an object so the specific values (breweryInfo.breweryName) can be targeted later
     name: breweryName,
@@ -211,7 +137,7 @@ function saveBrewery() {
     breweries.push(breweryInfo);
     localStorage.setItem('savedBreweries', JSON.stringify(breweries));
   } else {
-    localStorage.setItem('savedBreweries', JSON.stringify([breweryInfo]));
+    localStorage.setItem('savedBreweries', JSON.stringify([breweryInfo])); //if no array currently exists for breweryInfo, create one.
   }
 }
 
