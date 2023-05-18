@@ -2,7 +2,10 @@
 
 var searchButton = document.getElementById('searchButton');
 document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('saveBtn').addEventListener('click', saveBrewery)
+  var saveButton = document.getElementById('saveBtn')
+  if (saveButton) {
+    saveButton.addEventListener('click', saveBrewery)
+  }
   //event listener for when the page is rendered
   var savedRating = localStorage.getItem('rating') //sets savedRating to previously stored ranks for breweries
   if (savedRating) {
