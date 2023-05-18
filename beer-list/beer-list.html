@@ -45,13 +45,16 @@
     </div>
   </nav>
 </header>
+
+<body>
+
 <section class="section is-large pt-6">
   <h1 class="title">Beer List</h1>
-  <input id="newBeer" class="input is-small is-success" type="text" placeholder="Search Beer Name">
+  <input class="input is-small is-success" id="newBeer" type="text" placeholder="Search Beer Name">
   <div class="block"></div>
-  <button class="button is-small is-warning is-focused"> Add To List</button>
+  <button class="button is-small is-warning is-focused" id="fetchBeerButton"> Add To List</button>
   <div class="block"></div>
-  <div class="tile is-ancestor">
+  <div id="beerList" class="tile is-ancestor">
     <div class="tile is-4 is-warning is-parent">
       <article class="tile is-child notification is-warning">
         <p class="title">Modelo</p>
@@ -80,7 +83,6 @@
   </div>
 </section>
 
-<body>
   <script src="../logic.js"></script>
   <script src="beer-list.js"></script>
 </body>
