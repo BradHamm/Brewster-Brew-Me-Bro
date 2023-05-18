@@ -6,10 +6,11 @@ Green = #25511
 */
 
 * {
-    font-family: 'Merriweather',serif;
+    font-family: 'Merriweather', serif;
 }
+
 #headerName {
-    font-size:xx-large;
+    font-size: xx-large;
 }
 
 /*
@@ -20,43 +21,50 @@ Green = #25511
 */
 
 #searchButton {
-    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🍺</text></svg>") 16 0,auto; /*!emojicursor.app*/
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🍺</text></svg>") 16 0, auto;
+    /*!emojicursor.app*/
 }
 
 /* Media Query for Mobile Devices */
 @media (max-width: 480px) {
     #pic {
         position: absolute;
-        top:10%;
+        top: 10%;
         left: 26px;
         max-width: 60px;
         height: auto;
     }
+
     .item {
         flex-basis: 100%;
     }
+
     .contact-bar {
-        flex-direction:column;
+        flex-direction: column;
     }
+
     .nav-bar {
-        flex-direction:column;
+        flex-direction: column;
     }
 
     .bottom-right-text {
         font-size: small;
     }
+
     aside {
         width: 5vh;
     }
+
     .info p {
         font-size: small;
     }
+
     .nav-bar li a {
         padding: 10px 16px;
         text-decoration: none;
     }
 }
-        
+
 /* Media Query for low resolution  Tablets, Ipads */
 @media (min-width: 481px) and (max-width: 767px) {
     #pic {
@@ -66,35 +74,43 @@ Green = #25511
         max-width: 78px;
         height: auto;
     }
+
     .item {
         flex-basis: 100%;
     }
+
     .contact-bar {
-        flex-direction:column;
+        flex-direction: column;
     }
+
     .nav-bar {
-        flex-direction:column;
+        flex-direction: column;
     }
+
     aside {
         width: 17vh;
     }
+
     .info-item {
         font-size: large;
     }
+
     .info p {
         font-size: small;
     }
+
     .bottom-right-text {
         font-size: small;
     }
+
     .nav-bar li a {
         padding: 10px 16px;
     }
 }
 
-    
+
 /* Media Query for Tablets Ipads portrait mode */
-@media (min-width: 768px) and (max-width: 1024px){
+@media (min-width: 768px) and (max-width: 1024px) {
     #pic {
         position: absolute;
         top: 8%;
@@ -106,16 +122,25 @@ Green = #25511
     aside {
         width: 17vh;
     }
+
     .contact-bar {
-        flex-direction:column;
+        flex-direction: column;
     }
+
     .info p {
         font-size: small;
     }
 }
-    
+
+/* removes the extra padding from the default bulma css for the favorite spots page */
+@media screen and (min-width: 1024px) {
+    .section.is-large {
+        padding: 0px !important;
+    }
+}
+
 /* Media Query for Laptops and Desktops */
-@media (min-width: 1025px) and (max-width: 1280px){
+@media (min-width: 1025px) and (max-width: 1280px) {
     #pic {
         position: absolute;
         top: 15%;
@@ -124,7 +149,7 @@ Green = #25511
         height: auto;
     }
 }
-        
+
 /* Media Query for Large screens */
 @media (min-width: 1281px) {
     #pic {
@@ -137,14 +162,19 @@ Green = #25511
 }
 
 @media all {
-    .info { flex: 3 0px; }
-    .aside1 { order: 1; } 
-    .info { order: 2; }
+    .info {
+        flex: 3 0px;
+    }
+
+    .aside1 {
+        order: 1;
+    }
+
+    .info {
+        order: 2;
+    }
 }
 
 .noBull li {
     list-style-type: none;
 }
-
-
-
