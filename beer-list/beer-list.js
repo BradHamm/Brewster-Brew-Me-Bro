@@ -97,7 +97,7 @@ function saveBeerLocally(beerData) {
   
     const abvEl = document.createElement('p');
     abvEl.classList.add('subtitle');
-    abvEl.textContent = `ABV: ${favBeer.abv}`;
+    abvEl.textContent = `ABV: ${favBeer.abv}%`;
     articleEl.append(abvEl);
   
     const taglineEl = document.createElement('p');
@@ -116,6 +116,7 @@ function saveBeerLocally(beerData) {
     // Create a textarea for notes
     const textareaEl = document.createElement('textarea');
     textareaEl.classList.add('textarea', 'is-success', 'is-focused');
+    textareaEl.value = getSavedBeerNotes(index); // Set the value from saved notes
     articleEl.append(textareaEl);
   
     // Create a div for the block
@@ -129,15 +130,31 @@ function saveBeerLocally(beerData) {
     buttonEl.textContent = 'Save';
     buttonEl.addEventListener('click', function () {
       const notes = textareaEl.value;
-      saveBeerLocally({ ...favBeer, notes });
+      saveBeerNotesLocally(index, notes);
     });
     articleEl.append(buttonEl);
   
     return articleEl;
   }
 
+  function saveBeerNotesLocally(index, notes) {
+    const savedBeerNotes = getSavedBeerNotesArray();
+    savedBeerNotes[index] = notes;
+    localStorage.setItem('savedBeerNotes', JSON.stringify(savedBeerNotes));
+  }
+  
+  function getSavedBeerNotesArray() {
+    const savedBeerNotesJSON = localStorage.getItem('savedBeerNotes');
+    return savedBeerNotesJSON ? JSON.parse(savedBeerNotesJSON) : [];
+  }
+  
+  function getSavedBeerNotes(index) {
+    const savedBeerNotes = getSavedBeerNotesArray();
+    return savedBeerNotes[index] || '';
+  }
 
-   function deleteBeer(index) {
+
+  function deleteBeer(index) {
     // Retrieve the existing saved beers from local storage
     const savedBeers = getSavedBeers();
   
@@ -147,10 +164,28 @@ function saveBeerLocally(beerData) {
     // Save the updated beers array to local storage
     localStorage.setItem('savedBeers', JSON.stringify(savedBeers));
   
+    // Update the indexes of the saved beer notes
+    updateBeerNoteIndexes(index);
+  
     // Re-render the saved beers
     renderSavedBeers();
   }
-
+  
+  function updateBeerNoteIndexes(deletedIndex) {
+    const savedBeerNotes = getSavedBeerNotesArray();
+  
+    savedBeerNotes.splice(deletedIndex, 1); // Remove the note at deletedIndex
+  
+    for (let i = deletedIndex; i < savedBeerNotes.length; i++) {
+      const note = savedBeerNotes[i];
+      if (note !== undefined) {
+        note.index = note.index - 1; // Update the indexes of the remaining notes
+      }
+    }
+  
+    localStorage.setItem('savedBeerNotes', JSON.stringify(savedBeerNotes));
+  }
+  
     // if user hits enter key, also save to list
     document.getElementById('newBeer').addEventListener("keypress", function(event) {
         // If the user presses the "Enter" key on the keyboard
