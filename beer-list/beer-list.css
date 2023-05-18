@@ -1,9 +1,16 @@
-
-.body{
-    background-color: #D6d6d6;
+.body {
+    background-color: #FFFDFE;
 }
 
-.section{
+.section {
     text-align: center;
-    background-color: #D6d6d6;
+    background-color: #FFFDFE;
+}
+
+#newBeer {
+    width: fit-content;
+}
+
+.notification.is-warning {
+    background-color: #F9CDAD !important;
 }

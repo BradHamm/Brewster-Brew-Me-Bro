@@ -14,4 +14,9 @@ Moving forward, site structure was built out further, including html, css, and j
 
 After html and css were laid out and connected properly, APIs were then connected. Furthermore, media queries and related hamburger menu were both added.
 
-Beyond this, we tightened up API functionality on the site, along with general bug fixing and site testing. 
+Beyond this, we tightened up API functionality on the site, along with general bug fixing and site testing.Some of the core technologies used for this project include, javascript, Bulma, html, css, Punk API, Open Brewery API, and other technologies mentioned throughout this document and the related code notes. 
+
+Deployed Link: https://bradhamm.github.io/Brewster-Brew-Me-Bro/ 
+
+Screenshot:
+
