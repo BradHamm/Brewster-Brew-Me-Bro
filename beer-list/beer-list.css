@@ -19,7 +19,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    gap: 10px; /* Add desired spacing between cards */
+    gap: 10px;
 }
 
 #beerList .tile {
