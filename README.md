@@ -18,5 +18,9 @@ Beyond this, we tightened up API functionality on the site, along with general b
 
 Deployed Link: https://bradhamm.github.io/Brewster-Brew-Me-Bro/ 
 
-Screenshot:
+Repo Link: https://github.com/BradHamm/Brewster-Brew-Me-Bro
+
+![Alt text](screenshot.png "screenshot")
+
+
 
